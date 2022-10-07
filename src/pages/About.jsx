@@ -6,12 +6,12 @@ const About = () => {
             A React app to search GitHub profiles and see profile details.
             App by
             <strong>
-            <a href='https://github.com/JorgeMtz' target={'_blank'}> Jorge Martinez</a>
+              <a href='https://github.com/JorgeMtz' target={'_blank'}> Jorge Martinez</a>
             </strong>
             .
         </p>
         <p className='text-lg text-gray-400'>
-            Version <span className='text-black'>1.0.0</span>
+            Version <span className='text-white'>1.0.0</span>
         </p>
     </div>
   )
