@@ -1,18 +1,28 @@
 import { useEffect, useContext } from "react"
 import GithubContext from "../context/github/GithubContext"
 import { useParams, Link } from "react-router-dom"
-import { FaCodepen, FaStore, FaUserFriends, FaUsers } from "react-icons/fa"
+import {
+  FaCodepen,
+  FaStore,
+  FaUserFriends,
+  FaUsers,
+  FaChevronLeft,
+} from "react-icons/fa"
 import Spinner from "../components/layout/Spinner"
 import RepoList from "../components/repos/RepoList"
+import { getUser } from "../context/github/GithubActions"
 
 const User = () => {
-  const { getUser, user, getUserRepos, repos, loading } =
-    useContext(GithubContext)
+  const { user, repos, loading, dispatch } = useContext(GithubContext)
   const params = useParams()
 
   useEffect(() => {
-    getUser(params.login)
-    getUserRepos(params.login)
+    dispatch({ type: "SET_LOADING" })
+    const getUserData = async () => {
+      const userData = await getUser(params.login)
+      dispatch({ type: "GET_USER", payload: userData })
+    }
+    getUserData()
   }, [])
 
   const {
@@ -43,7 +53,7 @@ const User = () => {
       <div className="w-full mx-auto lg:w-10/12">
         <div className="mb-4">
           <Link to="/" className="btn btn-ghost">
-            Back To Search
+            <FaChevronLeft /> Back To Search
           </Link>
         </div>
 
